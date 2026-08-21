@@ -1,0 +1,6 @@
+# dsh-ui-digest bundle layer: registers the digest overview tab in the
+# conversation view ring. `dsh plugin add` mounts this layer; the row id
+# mirrors the one used by the deepseek-harness web-app bundle roster.
+- insert:
+    - id: ui-digest
+      name: dsh-ui-digest
