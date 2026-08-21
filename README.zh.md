@@ -27,14 +27,13 @@ AI 的回复动辄几百行（文本、工具卡片、diff、推理过程），�
 
 ### 作为 dsh bundle（推荐）
 
-本包附带预构建的客户端产物（`lib/`），并声明了 `dsh.bundle` + `dsh.client`，可直接用插件 CLI 安装：
+本包附带预构建的客户端产物（`lib/`），并声明了 `dsh.bundle` + `dsh.client`，可直接用插件 CLI 安装。从[最新 Release](https://github.com/rocklau/dsh-ui-digest/releases) 获取 tarball 后执行（无需 npm 账号）：
 
 ```sh
-# 在包含本包的目录下（或发布到 npm 之后）
-dsh plugin add ./dsh-ui-digest
+dsh plugin add https://github.com/rocklau/dsh-ui-digest/releases/download/v0.1.0/dsh-ui-digest-0.1.0.tgz
 ```
 
-这会向你的 profile 组合注入 `ui-digest` 行，浏览器端插件从 `lib/client.js` 提供。
+这会向你的 profile 组合注入 `ui-digest` 行，浏览器端插件从 `lib/client.js` 提供。本地检出同样适用：`dsh plugin add ./dsh-ui-digest`。
 
 ### 接入 deepseek-harness 源码
 

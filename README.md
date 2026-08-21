@@ -27,14 +27,13 @@ Click a row to expand the full user message and the full reply text. The summary
 
 ### As a dsh bundle (recommended)
 
-The package ships a pre-built client bundle in `lib/` and declares `dsh.bundle` + `dsh.client`, so it installs with the plugin CLI:
+The package ships a pre-built client bundle in `lib/` and declares `dsh.bundle` + `dsh.client`, so it installs with the plugin CLI. Grab the tarball from the [latest release](https://github.com/rocklau/dsh-ui-digest/releases) and add it (no npm account needed):
 
 ```sh
-# from a directory containing this package (or after publishing to npm)
-dsh plugin add ./dsh-ui-digest
+dsh plugin add https://github.com/rocklau/dsh-ui-digest/releases/download/v0.1.0/dsh-ui-digest-0.1.0.tgz
 ```
 
-This injects the `ui-digest` row into your profile's composition; the browser plugin is served from `lib/client.js`.
+This injects the `ui-digest` row into your profile's composition; the browser plugin is served from `lib/client.js`. A local checkout works the same way: `dsh plugin add ./dsh-ui-digest`.
 
 ### From the deepseek-harness source tree
 
