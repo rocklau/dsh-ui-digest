@@ -21,8 +21,6 @@ AI 的回复动辄几百行（文本、工具卡片、diff、推理过程），�
 - **中英双语**——走 dsh 标准 locale 机制。
 - **只读投影**——无服务、无 Context 合并、无会话节点定义，完全仿照官方 `ui-trajectory` 纯消费者模式。
 
-![摘要行](assets/digest-overview-2.png)
-
 ## 安装
 
 ### 作为 dsh bundle（推荐）

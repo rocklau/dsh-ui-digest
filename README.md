@@ -21,8 +21,6 @@ Click a row to expand the full user message and the full reply text. The summary
 - **Bilingual** — Simplified Chinese and English copy through the dsh locale system.
 - **Read-only projection** — no service, no Context merge, no conversation-node definitions; follows the official `ui-trajectory` pure-consumer pattern.
 
-![Digest rows](assets/digest-overview-2.png)
-
 ## Installation
 
 ### As a dsh bundle (recommended)
