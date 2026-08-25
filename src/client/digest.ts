@@ -9,7 +9,8 @@ import type { ChatConversationViewNode, ToolCallBlock } from '@deepseek-ai/dsh-c
 
 /** One counted tool category in a round (label keys live in the locale dictionaries). */
 export interface DigestAction {
-  /** Category key: 'shell' | 'read' | 'edit' | 'search' | 'web' | 'subagent' | 'todo' | 'skill' | 'goal' | 'plan', or the raw tool name when unknown. */
+  /** Category key: 'shell' | 'read' | 'edit' | 'search' | 'web' | 'subagent'
+   * | 'todo' | 'skill' | 'goal' | 'plan', or the raw tool name when unknown. */
   readonly kind: string
   /** Fallback display label: the raw tool name when the category is unknown. */
   readonly label: string
@@ -71,7 +72,11 @@ const ACTION_CATEGORIES: Readonly<Record<string, string>> = {
   web_fetch: 'web',
 }
 
-/** Categorize one tool name into a stable display category key. */
+/**
+ * Categorize one tool name into a stable display category key.
+ * @param name - raw tool name from the call block.
+ * @returns the category key, or the input unchanged when unknown.
+ */
 export function categorizeTool(name: string): string {
   const direct = ACTION_CATEGORIES[name]
   if (direct !== undefined) return direct
@@ -86,7 +91,11 @@ export function categorizeTool(name: string): string {
 /** Keys probed for file paths in edit/write-style tool arguments. */
 const FILE_ARG_KEYS = ['path', 'filePath', 'oldPath', 'newPath', 'uri', 'root', 'file'] as const
 
-/** Extract unique file paths from a raw JSON tool-arguments string. */
+/**
+ * Extract unique file paths from a raw JSON tool-arguments string.
+ * @param argsRaw - JSON-encoded arguments of one tool call, when captured.
+ * @returns trimmed path values in {@link FILE_ARG_KEYS} order, deduplicated.
+ */
 export function extractFilePaths(argsRaw: string | undefined): string[] {
   if (argsRaw === undefined) return []
   let args: unknown
@@ -173,6 +182,8 @@ function isUserNode(kind: string): kind is 'user' | 'steering' {
  * Fold the assembled Chat nodes (any order) into per-user-message digest
  * rounds ordered by anchor seq. Assistant evidence for a round is: settled
  * text from assistant steps, settled tool results, or the turn-tail closing.
+ * @param nodes - the assembled Chat nodes in log order.
+ * @returns one round per user message, ordered by anchor seq.
  */
 export function buildDigests(nodes: readonly ChatConversationViewNode[]): DigestRound[] {
   const ordered = [...nodes].sort((left, right) => left.anchorSeq - right.anchorSeq || left.key.localeCompare(right.key))
@@ -260,6 +271,9 @@ const NEWLINE = /\n/
  * first sentence punctuation, falling back to the first line when the text
  * carries none; hard-truncate at `max` with an ellipsis when the sentence
  * runs longer. Internal whitespace collapses to single spaces.
+ * @param text - source reply text.
+ * @param max - display cap in characters; longer sentences end with an ellipsis.
+ * @returns the collapsed one-line summary, never exceeding `max` characters.
  */
 export function firstSentence(text: string, max = 140): string {
   const trimmed = text.trim()

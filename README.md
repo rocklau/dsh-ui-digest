@@ -5,7 +5,7 @@ A **turn-digest overview** tab for the [DeepSeek Harness](https://github.com/dee
 Long agent replies — hundreds of lines of text, tool cards, diffs, reasoning — bury what you actually asked and what the AI did each round. This plugin adds a **Overview (全览)** tab to the conversation view ring that folds the whole session into one round per user message:
 
 - the **message you sent**,
-- a **one-sentence summary** of the AI reply (first sentence of the settled reply text, truncated at 160 chars),
+- a **one-sentence summary** of the AI reply (first sentence of the settled reply text, truncated at 140 chars),
 - **tool-action chips** grouped by category (commands run, files edited, files read, web searches, subagent delegations, …) with file paths extracted from edit/write arguments.
 
 Click a row to expand the full user message and the full reply text. The summary is heuristic, deterministic and purely client-side — no LLM call, no RPC, zero cost — and updates live while a turn streams.
@@ -53,7 +53,7 @@ The plugin is a pure-consumer browser plugin (mirroring the official `ui-traject
 - registers one tab in the `conversation.view` slot ring (order 20),
 - folds `snapshot.chat.nodes` via the framework standard kit's `useSession` into rounds keyed by user message,
 - rounds start at append-surface `user`/`steering` nodes; assistant evidence is settled text from `assistant-step` nodes, settled `tool-call` roots, or the `turn-tail` closing,
-- the summary is `firstSentence(replyText, 160)` with structured fallbacks (`ran tool calls only`, `no text reply`, `reply in progress`).
+- the summary is `firstSentence(replyText, 140)` with structured fallbacks (`ran tool calls only`, `no text reply`, `reply in progress`).
 
 Tool categorization:
 
